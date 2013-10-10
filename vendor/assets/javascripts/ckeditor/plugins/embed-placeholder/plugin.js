@@ -70,7 +70,7 @@
                       ['Select a Service:', ''],
                       ['Brightcove', 'brightcove'],
                       ['Cover It Live', 'coveritlive'],
-                      //['DocumentCloud', 'documentcloud'],
+                      ['DocumentCloud', 'documentcloud'],
                       ['Facebook', 'facebook'],
                       ['Fire Tracker', 'firetracker'],
                       ['Google Maps', 'googlemaps'],

@@ -8,14 +8,6 @@ GIT
       rails (>= 3.0)
 
 GIT
-  remote: git://github.com/SCPR/embeditor-rails.git
-  revision: c2b599570e1b0c129fafe07068248b235a95d333
-  specs:
-    embeditor-rails (0.2.0)
-      eco (~> 1.0.0)
-      rails (>= 3.2.0)
-
-GIT
   remote: git://github.com/SCPR/outpost-aggregator.git
   revision: f4f6ffe1aed23c87a830d68457c687038442c9e7
   specs:
@@ -74,6 +66,13 @@ GIT
     turbo-sprockets-rails3 (0.3.10)
       railties (> 3.2.8, < 4.0.0)
       sprockets (>= 2.0.0)
+
+PATH
+  remote: /Users/bricker/websites/kpcc/embeditor-rails
+  specs:
+    embeditor-rails (0.2.0)
+      eco (~> 1.0.0)
+      rails (>= 3.2.0)
 
 GEM
   remote: https://rubygems.org/
