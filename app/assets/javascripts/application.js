@@ -22,6 +22,7 @@
 //= require embeditor/adapters/brightcove
 //= require embeditor/adapters/rebel_mouse
 //= require embeditor/adapters/google_fusion
+//= require embeditor/adapters/whitehouse
 
 //= require content_carousel
 //= require audio

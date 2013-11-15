@@ -7,6 +7,7 @@ gem 'jquery-rails'
 gem "bcrypt-ruby", "~> 3.0.0"
 
 gem 'thinking-sphinx', '~> 3.0.5'
+# gem 'thinking-sphinx', path: "#{ENV['PROJECT_HOME']}/clones/thinking-sphinx"
 # https://github.com/pat/riddle/pull/75
 gem 'riddle', github: 'bricker/riddle', branch: 'fix-empty-array-filter'
 
@@ -43,8 +44,8 @@ gem 'escape_utils'
 gem 'simple_form', "~> 2.0"
 gem 'jbuilder'
 
-gem 'embeditor-rails', github: 'SCPR/embeditor-rails'
-#gem 'embeditor-rails', path: "#{ENV['PROJECT_HOME']}/embeditor-rails"
+#gem 'embeditor-rails', github: 'SCPR/embeditor-rails'
+gem 'embeditor-rails', path: "#{ENV['PROJECT_HOME']}/embeditor-rails"
 
 
 ## Utility
