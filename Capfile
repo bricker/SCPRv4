@@ -1,4 +1,25 @@
+$deploy_time = Time.now.to_i
+
 Bundler.require(:deployment)
+
+def rake_remote(command, *args)
+  within release_path do
+    with rails_env: fetch(:rails_env) do
+      execute :rake, command, *args
+    end
+  end
+end
+
+def touch_restart
+  tmp = release_path.join('tmp')
+
+  if test "[ -f #{tmp} ]"
+    execute :mkdir, tmp
+  end
+
+  execute :touch, release_path.join('tmp/restart.txt')
+end
+
 
 # Load DSL and Setup Up Stages
 require 'capistrano/setup'

@@ -14,10 +14,21 @@ set :maintenance_template_path, "public/maintenance.erb"
 set :maintenance_basename, "maintenance"
 
 set :format, :pretty
-set :log_level, :debug
+set :log_level, ENV.fetch('LOG', :info)
 
 
 namespace :deploy do
+  after :finishing, 'deploy:cleanup', 'deploy:notify_time'
+
+
+  task :notify_time do
+    run_locally do
+      min, sec = (Time.now.to_i - $deploy_time).divmod(60)
+      info "Finished Deployment in #{min} minutes #{sec} seconds"
+    end
+  end
+
+
   desc "Put up a maintenance page"
   namespace :web do
     task :disable do
@@ -49,14 +60,6 @@ namespace :deploy do
   end
 
 
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 60 do
-      execute :touch, release_path.join('tmp/restart.txt')
-    end
-  end
-
-
   task :notify do
     run_locally do
       if token = YAML.load_file(
@@ -83,7 +86,4 @@ namespace :deploy do
       end
     end
   end
-
-
-  after :finishing, 'deploy:cleanup'
 end
