@@ -1,8 +1,16 @@
-require 'new_relic/recipes'
 require 'net/http'
+require 'newrelic_rpm'
 
 set :stage, :production
+set :rails_env, :production
+set :deploy_to, "/web/scprv4"
 set :branch, "master"
+
+set :ssh_options, {
+  user: 'scprv4'
+}
+
+set :newrelic_license_key, NewRelic::Agent.config[:license_key]
 
 web1  = "66.226.4.226"
 web2  = "66.226.4.227"

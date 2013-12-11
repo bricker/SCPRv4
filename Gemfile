@@ -83,10 +83,14 @@ group :assets do
 end
 
 
-group :development do
+group :deployment do
   gem 'capistrano', '~> 3.0.0'
   gem 'capistrano-rails', '~> 1.1.0'
   gem 'capistrano-bundler', '~> 1.1.0'
+end
+
+
+group :development do
   gem 'pry'
   gem 'pry-debugger'
 end
@@ -109,7 +113,7 @@ end
 
 
 group :test do
-  gem 'simplecov', require: false
+  gem 'simplecov'
   gem "sqlite3"
   gem 'factory_girl_rails'
   gem 'database_cleaner'

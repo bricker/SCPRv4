@@ -1,32 +1,33 @@
-ts_roles = fetch(:thinking_sphinx_roles, [:db])
+namespace :load do
+  namespace :defaults do
+    set :thinking_sphinx_roles, [:db]
+  end
+end
 
-ts_opts = fetch(:thinking_sphinx_options, {
-  :roles => fetch(:thinking_sphinx_roles)
-})
 
 namespace :thinking_sphinx do
   desc 'Generate the Sphinx configuration file.'
-  task :configure, ts_roles do
+  task :configure, fetch(:thinking_sphinx_roles) do
     rake 'ts:configure'
   end
 
   desc 'Build Sphinx indexes into the shared path and symlink them into your release.'
-  task :index, ts_roles do
+  task :index, fetch(:thinking_sphinx_roles) do
     rake 'ts:index'
   end
 
   desc 'Start the Sphinx search daemon.'
-  task :start, ts_roles do
+  task :start, fetch(:thinking_sphinx_roles) do
     rake 'ts:start'
   end
 
   desc 'Stop the Sphinx search daemon.'
-  task :stop, ts_roles do
+  task :stop, fetch(:thinking_sphinx_roles) do
     rake 'ts:stop'
   end
 
   desc 'Restart the Sphinx search daemon.'
-  task :restart, ts_roles do
+  task :restart, fetch(:thinking_sphinx_roles) do
     rake 'ts:stop ts:configure ts:start'
   end
 
@@ -34,7 +35,7 @@ namespace :thinking_sphinx do
 Stop, reindex, and then start the Sphinx search daemon. This task must be executed \
 if you alter the structure of your indexes.
   DESC
-  task :rebuild, ts_roles do
+  task :rebuild, fetch(:thinking_sphinx_roles) do
     rake 'ts:rebuild'
   end
 end
