@@ -1,37 +1,21 @@
-# --------------
-# Variables
+set :stage, :staging
 set :branch, "master"
-set :rails_env, "staging"
 
-# --------------
-# Roles
 scprdev = "66.226.4.241"
-role :app,      scprdev
-role :web,      scprdev
-role :workers,  scprdev
-role :db,       scprdev, :primary => true
-role :sphinx,   scprdev
+role :app, [scprdev]
+role :workers, [scprdev]
+role :db, [scprdev]
+role :sphinx, [scprdev]
 
-
-# --------------
-# Callbacks
-after "deploy:update_code", "dbsync:pull"
-after "deploy:update_code", "thinking_sphinx:staging:index"
-
-
-# --------------
-# Tasks
 namespace :deploy do
-  task :restart, roles: [:app] do
-    run "touch #{current_release}/tmp/restart.txt"
-  end
+  after :updated, "dbsync:pull", "thinking_sphinx:staging:index"
 end
 
 
 namespace :dbsync do
   task :pull do
     if [true, 1].include? syncdb
-      run "cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} dbsync:pull"
+      invoke "dbsync:pull"
     else
       logger.info "SKIPPING dbsync (syncdb set to #{syncdb})"
     end
